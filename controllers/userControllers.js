@@ -43,3 +43,31 @@ exports.deleteUser = async (req, res) => {
     res.status(500).json(err);
   }
 };
+
+exports.getUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (user === null) {
+      res.status(404).json({
+        error: "There is no user with that id",
+      });
+    } else {
+      const { password, ...others } = user._doc;
+      res.status(200).json(others);
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+exports.getAllUsers = async (req, res) => {
+  const query = req.query.new || false;
+  try {
+    const users = query
+      ? await User.find().sort({ _id: -1 }).limit(5)
+      : await User.find();
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
