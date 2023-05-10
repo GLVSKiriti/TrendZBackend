@@ -28,3 +28,5 @@ router.get("/find/:userId", verifyTokenAuthorization, getUserCart);
 
 //get all user carts
 router.get("/", verifyTokenAndAdmin, getAllUserCarts);
+
+module.exports = router;
