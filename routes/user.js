@@ -3,6 +3,7 @@ const {
   deleteUser,
   getUser,
   getAllUsers,
+  getUserStats,
 } = require("../controllers/userControllers");
 const {
   verifyTokenAuthorization,
@@ -22,5 +23,8 @@ router.get("/find/:id", verifyTokenAndAdmin, getUser);
 
 //getalluser
 router.get("/findall", verifyTokenAndAdmin, getAllUsers);
+
+//getuserstats
+router.get("/stats", verifyTokenAndAdmin, getUserStats);
 
 module.exports = router;
